@@ -12,7 +12,8 @@ Dependency : `brew install terminal-notifier`
 ./cpu_watch.sh 50 "Google Drive" 10
 ```
 This will pop a notification up if the process Google Drive is taking 50% of
-a CPU or more. But it's not very convenient to run this manually. See below :
+a CPU or more. Click on the notification and it will open Acitivity Monitor.
+But it's not very convenient to run this manually. See below :
 
 # Start the script every X sec
 You can use a LaunchAgent to launch the bash script every X sec.
