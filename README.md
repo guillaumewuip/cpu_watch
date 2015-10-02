@@ -11,7 +11,7 @@ Dependency : `brew install terminal-notifier`
 ```
 ./cpu_watch.sh 50 "Google Drive" 10
 ```
-This will pop a notification up if the process Google Drive is takinh 50% of
+This will pop a notification up if the process Google Drive is taking 50% of
 a CPU or more. But it's not very convenient to run this manually. See below :
 
 # Start the script every X sec
@@ -46,7 +46,8 @@ Here's an example where `cpu_watch.sh` is fired every 30 sec.
 Name this file `com.wuip.cpu_watch`,
 put it into ~/Library/LaunchAgents and
 `launchctl load ~/Library/LaunchAgents/com.wuip.cpu_watch.plist`.
-It will start when the user gets logged in.
+It will start when the user get logged in.
+Don't forget to make the script executable `chmod +x cpu_watch.sh`
 
 # Arguments
 ```
@@ -57,3 +58,5 @@ It will start when the user gets logged in.
 - `<regex>` : a regex that will be use this way : `ps -erco %cpu,command | grep -E "<regex>"`
 - `<check interval>` : min time in minutes between two notification about the same process
 - `<path to terminal-notififier>` : when not set default is `/usr/local/Cellar/terminal-notifier/1.6.3/bin/terminal-notifier`
+
+# [LICENSE](LICENSE) : wtfpl
