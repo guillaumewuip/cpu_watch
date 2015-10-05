@@ -35,7 +35,7 @@ if ((cpu_limit >= 0)) && [ "x$processes" != "x" ]; then
         fi
 
         #if cpu > cpu_limit
-        if [ $(echo $cpu | cut -c1) -ge $cpu_limit ]; then
+        if [ $(echo $cpu | cut -d, -f1) -ge $cpu_limit ]; then
             $notifier -title "$title" -subtitle "$subtitle" -message $cpu \
                 -group $notifier_group -activate $activity -sender $activity \
                 > /dev/null
