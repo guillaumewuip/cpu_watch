@@ -30,7 +30,7 @@ if ((cpu_limit >= 0)) && [ "x$processes" != "x" ]; then
         cpu=$(echo $p | cut -f1 -d\ )\%
 
         #if file exists and is older than 10min, remove it
-        if [ -e $prefix/"$subtitle" ] && test `find $prefix/"$subtitle" -mmin +"$interval"`; then
+        if [ -e \""$prefix"/"$subtitle"\" ] && test $(find \”"$prefix"/"$subtitle"\" -mmin +"$interval"); then
             rm $prefix/"$subtitle"
         fi
 
