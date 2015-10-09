@@ -16,9 +16,9 @@ fi
 prefix=/var/tmp/cpu_watch
 mkdir -p $prefix
 
-echo $cpu_limit
-echo $processes
-echo $notifier
+#echo $cpu_limit
+#echo $processes
+#echo $notifier
 
 sendNotif() {
 
@@ -31,7 +31,7 @@ sendNotif() {
 
     #if cpu > cpu_limit
     if [ $cpu_int -ge $cpu_limit ]; then
-        echo $subtitle $cpu $cpu_int $cpu_limit
+        #echo $subtitle $cpu $cpu_int $cpu_limit
         $notifier -title "$title" -subtitle "$subtitle" -message $cpu \
             -group $notifier_group -activate $activity -sender $activity \
             > /dev/null
@@ -46,21 +46,20 @@ if ((cpu_limit >= 0)) && [ "x$processes" != "x" ]; then
     echo "$current" | while read p; do
         subtitle=$(echo $p | cut -f2- -d\ )
         cpu=$(echo $p | cut -f1 -d\ )\%
-        echo $cpu
+        path=$(echo "$prefix"/"$subtitle" | tr -d '[[:space:]]')
+        #echo $cpu
+        #echo $path
 
         #if file exists and is older than 10min, remove it and send nofif
-        if [ -e "$prefix/$subtitle" ] && test $(find "$prefix/$subtitle" -mmin +"$interval"); then
-            echo "file"
-
+        if [ -e "$path" ] && test $(find "$path" -mmin +"$interval"); then
             sendNotif "$subtitle" $cpu
-            rm "$prefix/$subtitle"
+            rm "$path"
         fi
 
         #if no file
-        if [ ! -e "$prefix/$subtitle" ]; then
-            echo "no file"
+        if [ ! -e "$path" ]; then
             #create a file in order to not fire a notif every 30sec
-            touch "$prefix/$subtitle"
+            touch "$path"
 
             sendNotif "$subtitle" $cpu
         fi
